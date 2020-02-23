@@ -1,0 +1,30 @@
+version: '3.0'
+services:
+  front:
+    build: front
+    container_name: front
+    ports: 
+      - 3000:3000
+    volumes: 
+      - ./front:/app
+    environment: 
+      CHOKIDAR_USEPOLLING: 'true'
+  back:
+    build: back
+    container_name: back
+    ports:
+      - 4000:4000
+    volumes: 
+      - ./back/app
+  postgres:
+    image: postgres
+    restart: always
+    ports: 
+      - 5432:5432
+    environment: 
+      POSTGRES_PASSWORD: basicpass
+  adminer:
+    image: adminer
+    restart: always
+    ports: 
+      - 8080:8080
